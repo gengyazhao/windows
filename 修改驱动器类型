@@ -1,0 +1,14 @@
+进入命令提示符
+shift+F10
+清理驱动器
+diskpart
+显示硬盘列表
+list disk
+选择需要操作的硬盘
+select disk 0
+格式化硬盘 0
+clean
+将驱动器转换为GPT分区类型
+convert gpt
+退出
+exit
