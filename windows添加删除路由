@@ -1,0 +1,13 @@
+Windows下添加删除路由
+route add -p 192.0.0.0 mask 255.0.0.0 193.168.121.169
+route add -p 202.0.0.0 mask 255.0.0.0 193.168.121.169
+route add -p 212.0.0.0 mask 255.0.0.0 193.168.121.169
+route add -p 222.0.0.0 mask 255.0.0.0 193.168.121.169
+
+route delete 192.0.0.0
+route delete 202.0.0.0
+route delete 212.0.0.0
+route delete 222.0.0.0
+windows 下删除路由		route delete 20.20.0.0
+	添加永久路由		route add -p 20.20.0.0 mask 255.255.0.0 20.20.32.1
+	显示路由		route print
