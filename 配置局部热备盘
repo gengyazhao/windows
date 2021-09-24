@@ -1,0 +1,26 @@
+当RAID组的成员盘为SAS盘时，支持SATA盘作为局部热备盘；当成员盘为SATA盘时，不支持SAS盘作为局部热备盘。
+登录管理界面
+进入“Drive Management”界面。
+在Avago SAS3416iMR操作界面中选择“Main Menu”并按“Enter”。
+选择“Drive Management”并按“Enter”。
+选定要操作的硬盘并按“Enter”进入详细操作界面
+配置局部热备盘。
+将“Operation”设置为“Assign Dedicated Hot Spare Drive”。
+选择“Go”并按“Enter”。
+打开当前存在的磁盘组列表，
+选择要关联的磁盘组并按“Enter”。
+使其状态变为“Enabled”。
+
+选择“OK”按“Enter”。
+进入操作确认界面。
+
+将“Confirm”设置为“Enable”。
+选择“Yes”并按“Enter”。
+显示The operation has been performed successfully。
+
+按“Enter”完成配置并返回上级界面。
+检查配置结果。
+在硬盘列表中，可以看到硬盘的状态变为“Hot Spare”
+退出配置界面。
+连续按“ESC”返回BIOS的“Front Page”界面。
+选择“Continue”并按“Enter”继续启动服务器。
