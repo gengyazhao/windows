@@ -1,0 +1,47 @@
+仅“Unconfigured Good”状态的硬盘，可设置为全局热备盘。
+
+对服务器的硬盘进行RAID分组后，可以配置热备盘来提高安全性，降低硬盘故障对系统业务的影响。
+
+Avago SAS3416iMR控制扣卡支持2种类型的热备盘：
+
+Global Hotspare：即全局热备盘，为控制扣卡上所有已配置的RAID所共有，1块控制扣卡中可配置1个或多个全局热备盘。当任意RAID内的与热备盘同类型的硬盘故障时，全局热备盘均可自动替代。
+Dedicated Hotspare：即局部热备盘，为控制扣卡上某个指定的RAID所专有，每个RAID都可以配置1个或多个局部热备盘。当指定RAID内的与热备盘同类型的硬盘故障时，局部热备盘可自动替换。
+
+机械盘与固态盘不能互相作为热备盘。
+机械盘分为SAS和SATA两种接口的硬盘，其中当RAID组的成员盘为SAS盘时，支持SATA盘作为局部热备盘，当成员盘为SATA盘时，不支持SAS盘作为局部热备盘。
+空闲硬盘可配置为热备盘，已加入RAID的硬盘不能配置为热备盘。
+热备盘必须是SATA硬盘或SAS硬盘，容量不小于RAID成员盘最大容量。
+除RAID 0外，其他类型的RAID均支持热备盘。
+全局热备盘和局部热备盘之间不能直接转换，需要先将硬盘恢复为空闲状态，再重新按需设置为全局热备盘或局部热备盘。
+
+
+
+Avago SAS3416iMR  配置全局热备盘
+操作步骤
+登录管理界面:
+通过服务器远程虚拟控制台登录服务器实时桌面。
+重启服务器。
+重启过程中，当出现Press Del go to Setup Utility时，按“Delete”。
+进入输入密码界面。
+选择“Device Manager”并按“Enter”
+选择要操作的Avago SAS3416iMR控制器，按“Enter”。
+在Avago SAS3416iMR操作界面中选择“Main Menu”并按“Enter”。
+选择“Drive Management”并按“Enter”。
+选定要操作的硬盘并按“Enter”进入详细操作界面
+
+配置全局热备盘。
+将“Operation”设置为“Assign Global Hot Spare Drive”并按“Enter”。
+选择“Go”并按“Enter”。
+将“Confirm”设置为“Enable”。
+选择“Yes”并按“Enter”。
+显示The operation has been performed successfully。
+
+按“Enter”完成配置并返回上级界面。
+检查配置结果。
+连续按“ESC”返回“Main Menu”界面。
+依次选择“Configuration Management > View Global HotSpare Drives”。
+在全局热备盘列表中，可以看到前面所设置的硬盘。
+
+退出配置界面。
+连续按“ESC”返回BIOS的“Front Page”界面。
+选择“Continue”并按“Enter”继续启动服务器。
