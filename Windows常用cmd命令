@@ -1,0 +1,36 @@
+转载自：https://blog.51cto.com/u_11451275/3226063
+1、ping
+2、tracert
+3、ipconfig
+4、route
+5、netstat
+netstat -ano  #查看系统端口使用情况
+netstat -ano | findstr 80 #查看指定端口占用情况
+tasklist | findstr "80" #查看进程id对应的进程名
+taskkill /f /t /im java.exe #kill 掉java进程
+
+6、control 控制面板
+7、notepad 记事本
+8、calc 计算器
+9、mspaint 画图工具
+10、write 写字板
+11、winver 查看windows版本
+12、mstsc 打开远程桌面连接
+13、gpedit.msc 打开组策略
+14、regedit 打开注册表
+15、services 打开服务管理
+16、Firewall.cpl 打开windows防火墙
+17、wuapp  windows更新
+18、shutdown -s -t now/60 定时关机
+19、shutdown -a 取消定时关机
+20、cls 清空命令行
+21、systeminfo 查看计算机系统信息
+22、devmgmt.msc 设备管理器
+23、shrpubw 创建共享文件夹
+24、secpol.msc 本地安全策略
+25、taskmgr 任务管理器
+26、explorer 资源管理器
+27、clipbrd 剪贴板查看器
+28、compmgmt.msc 计算机管理
+29、lusrmgr.msc 本机用户和组
+30、nslookup IP地址侦测器
