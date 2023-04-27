@@ -1,0 +1,3 @@
+1、进入Boot修改BMC配置F11
+2、进入raid卡配置，ctrl+c,
+3、选择系统启动盘ctrl+b
