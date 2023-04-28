@@ -1,0 +1,19 @@
+#win10 bat设置IP，设置DNS首选，设置DNS备选服务器
+
+@echo off
+cls
+color 0A
+mode con cols=200 lines=500
+
+@echo off
+
+echo Config IP Tools
+
+set/p ip=plesase input IP:
+
+netsh interface ip set address name="xiaowang" source=static addr="%ip%" mask=255.255.255.0 gateway=x.x.x.x gwmetric=1
+netsh interface ip set dnsservers name="xiaowang" source=static addr=8.8.8.8 primary validate=no
+netsh interface ip add dnsservers name="xiaowang" addr=114.114.114.114 index=2 validate=no
+ipconfig /flushdns
+ipconfig /all
+pause
