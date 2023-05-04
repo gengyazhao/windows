@@ -1,3 +1,23 @@
+echo、@、call、pause、rem　是批处理文件最常用的几个命令
+echo 表示显示此命令后的字符
+echo off 表示在此语句后所有运行的命令都不显示命令行本身
+@ 与echo off相象，但它是加在其它命令行的最前面，表示运行时不显示命令行本身。 
+call 调用另一条批处理文件（如果直接调用别的批处理文件 ，执行完那条文件后将无法执行当前文件后续命令） 
+pause 运行此句会暂停，显示Press any key to continue... 等待用户按任意键后继续。
+rem 表示此命令后的字符为解释行，不执行，只是给自己今后查找用的。
+
+批处理文件中还可以像C语言一样使用参数，这只需用到一个参数表示符%
+%表示参数，参数是指在运行批处理文件时在文件名后加的字符串。变量可以从 %0到%9，%0表示文件名本身，字符串用%1到%9顺序表示。 
+
+借批处理自动清除系统垃圾
+@echo off
+if exist c:\windows\temp. del c:\windows\temp\.
+if exist c:\windows\Tempor~1. del c:\windows\Tempor~1\.
+if exist c:\windows\History. del c:\windows\History\.
+if exist c:\windows\recent. del c:\windows\recent\.
+将以上脚本内容保存到`autoexec.bat`里，每次开机时就把系统垃圾给自动删除了
+
+
 1、*.*可以简写为.
 
 例如，删除当前目录中的全部文件∶
