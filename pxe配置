@@ -1,0 +1,47 @@
+PXE预启动执行环境（Pre-boot Execution Environment），客户端通过网络从TFTP服务器下载启动文件到本地，并由该启动文件来引导预先安装在TFTP服务器中的操作系统在本地运行。
+
+Option66字段用来指定为PXE客户端分配的TFTP服务器地址，Option67字段用来指定为PXE客户端分配的启动文件名。
+
+TFTP服务器地址：192.168.2.1/24
+DHCP服务器地址：192.168.1.1/24
+
+sys
+sysn DHCP-server
+dhcp enable
+
+vlan 10
+quit
+int g0/0/1
+port link-type trunk
+port trunk allow-pass vlan 10
+quit
+
+int vlanif 10
+ip add 192.168.1.1 24
+quit
+
+int vlanif 10
+dhcp select interface
+#dhcp select global
+dhcp server gateway-list 192.168.1.1
+quit
+
+int vlanif 10
+dhcp server option 66 ip-address 192.168.2.1
+dhcp server option 67 ascii boot\x64\wdsnbp.com
+dhcp server next-server 192.168.2.1
+quit
+
+
+当TFTP服务器和PXE客户端不在同一网段，因此需要配置dhcp server next-server 命令指定PXE客户端启动过程中下一步使用的网络服务器IP地址。
+当TFTP服务器和PXE客户端处于同一网段，需要配置dhcp server excluded-ip-address命令在地址池内排除TFTP服务器地址。
+
+查看配置dis ip pool
+地址池配置：
+ip pool pool-1
+network 192.168.1.0 mask 24
+gateway-list 192.168.1.1
+dns-list x.x.x.x
+excluded-ip-address x.x.x.x
+quit
+
