@@ -14,3 +14,13 @@ match("",{"","","","",},0)
 
 查找结果为空时不显示0
 =IFNA(VLOOKUP(Sheet1!E2,Sheet1!E:E,1,0)&"","")
+vlookup查找两个条件D和M时，在要查找的sheet中构建辅助列A，A=sheet2!D&sheet2!M
+=IFNA(VLOOKUP(D3&M3,Sheet2!$A$1:$H$70,3,1)&"","")
+
+=XLOOKUP(D3&M3,Sheet2!B:B&Sheet2!H:H,Sheet2!C:C)
+要查找的条件D3/M3
+要匹配的条件Sheet2!B:B&Sheet2!H:H
+要返回的结果Sheet2!C:C
+
+
+=filter(Sheet2!C:C,((Sheet2!B:B=D3)*(Sheet2!H:H=M3)*(第N个匹配条件)))
