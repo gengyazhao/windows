@@ -1,0 +1,19 @@
+copy只能复制文件，不能复制文件夹;xcopy可以复制文件夹，复制文件夹时，源目录，目的目录后面都要加\，这样才是文件夹，否则会提示判断是文件还是文件夹
+
+copy /Y ..\a.txt .\a.txt
+..当前目录的上一级目录
+.\当前目录
+/Y           不使用确认是否要覆盖现有目标文件的提示。
+
+xcopy /S /J \\1.1.1.1\d$\abc\ d:\abc\
+pause
+
+/J           复制时不使用缓冲的 I/O。推荐复制大文件时使用。
+/S           复制目录和子目录，不包括空目录。
+/Q           复制时不显示文件名。
+
+清除注册表端口信息
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\COM Name Arbiter\Devices" /f /va
+/va        删除该项下面的所有值。
+/f         不用提示，强制删除。
+
