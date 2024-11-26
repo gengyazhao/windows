@@ -17,3 +17,55 @@ netsh interface ip add dnsservers name="xiaowang" addr=114.114.114.114 index=2 v
 ipconfig /flushdns
 ipconfig /all
 pause
+
+
+#杀进程
+taskkill /f /im abc.exe
+pause
+
+#移动文件夹
+ chcp 65001
+move /Y d:\abc\ef d:\ef
+pause
+
+#获取IP地址
+chcp 65001
+@echo off
+ipconfig | findstr "IPv4" | findstr "1.1." >d:\ip.txt
+for /f "tokens=1,* delims=:" %%a in (d:\ip.txt) do (
+set abc=%%b
+)
+:delleft
+if "%abc:~0,1%"==" " set abc=%abc:~1%&&goto delleft
+echo the computer ip is %abc%
+set url1=http://www.baidu.com/%abc%/xyz.jnlp
+#开机自启动目录，目录包含空格时需要使用双引号
+set des_path="C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\xyz.jnlp"
+#命令行下载文件到指定目录
+curl -o %url1% %des_path%
+#静默安装文件
+start /wait javaws %des_path% -silent
+
+::start 函数执行软件安装 /wait函数表示等待静默安装，/S表示自动执行安装默认参数
+start /wait .\abc.exe /S
+if %errorlevel% neq 0 (
+echo install failed
+pause
+exit
+)
+echo abc install success
+
+#添加系统环境变量d:\abc
+wmic environment where "name='path' and username='<system>'" set VariableValue='d:\abc;%path%'
+#指定安装目录
+start /wait .\abc.exe /SILENT /NOCANCEL /DIR="D:\abc"
+start /wait .\abc.exe /S /CONFIG=.\Pycharm_silent.config /D=d:\Program Files (x86)\JetBrains\
+
+silent.config
+mode=admin
+launcher32=0
+launcher64=1
+jre32=0
+
+#指定winrar解压指定文件到指定目录
+start /wait winrar x a.zip d:\a\
