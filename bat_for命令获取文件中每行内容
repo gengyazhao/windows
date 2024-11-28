@@ -8,5 +8,13 @@ timeout /t 10
 ::设置超时等待时间
 pause
 
-
-
+::替换文件中的字符串
+chcp 65001
+@echo off&setlocal EnableDelayedExpansion
+for /f "delims=" %%i in (d:\temp\ip.txt) do (
+set a=%%i
+set "a=!a:StrictHostKeyChecking ask=StrictHostKeyChecking no!" 
+echo !a! >>d:\temp\ip_bkp.txt
+)
+move /Y d:\temp\ip_bkp.txt d:\temp\ip.txt
+pause
