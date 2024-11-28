@@ -1,0 +1,12 @@
+chcp 65001
+::设置批处理编码方式为utf-8
+@echo off
+::关闭回显
+for /f "delims=" %%i in (d:\temp\ssh_config) do (echo %%i)
+::获取文件内容，并逐行显示
+timeout /t 10
+::设置超时等待时间
+pause
+
+
+
