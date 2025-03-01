@@ -33,3 +33,5 @@ dir /b /on
 4、显示指定目录下的所有子目录名（只显示目录，不显示文件名）
 dir d: /ad
 
+5、win10将当前用户设置为管理员
+echo Y | reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0
