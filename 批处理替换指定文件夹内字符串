@@ -1,0 +1,20 @@
+chcp 65001
+@echo off
+setlocal enabledelayedexpansion
+
+REM 设置要替换的目录
+set "target_dir=D:\abc"
+
+REM 遍历目录及其子目录中的所有 .txt 文件
+for /r "%target_dir%" %%f in (*.txt) do (
+    REM 检查文件是否包含指定的字符串xyz,替换为xyz_123456
+    findstr /i /m "hdc shell reboot bootloader" "%%f" >nul
+    if !errorlevel! equ 0 (
+        REM 使用 PowerShell 替换文件中的字符串
+        powershell -Command "(Get-Content '%%f') -replace 'xyz', 'xyz_123456' | Set-Content '%%f'"
+        echo 已处理文件: %%f
+    )
+)
+
+echo 处理完成！
+pause
