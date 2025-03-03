@@ -24,3 +24,16 @@ vlookup查找两个条件D和M时，在要查找的sheet中构建辅助列A，A=
 
 
 =filter(Sheet2!C:C,((Sheet2!B:B=D3)*(Sheet2!H:H=M3)*(第N个匹配条件)))
+
+使用IF 搭配 AND、OR 及 NOT 的范例
+=IF(AND(A2>0,B2<100),TRUE, FALSE)
+
+=IF(AND(A3="Red",B3="Green"),TRUE,FALSE)
+
+=IF(OR(A4>0,B4<50),TRUE, FALSE)	
+
+=IF(OR(A5="Red",B5="Green"),TRUE,FALSE)
+
+=IF(NOT(A6>50),TRUE,FALSE)
+
+=IF(NOT(A7="Red"),TRUE,FALSE)
