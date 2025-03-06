@@ -1,0 +1,4 @@
+1、通过services.msc打开服务
+2、通过右键服务的属性，复制服务名称：eg_name
+3、停止服务
+4、卸载服务：sc delete eg_name
