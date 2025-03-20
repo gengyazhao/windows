@@ -6,8 +6,20 @@ reg add 注册表路径 /v 值名 /t 要修改的数值类型 /d 想要输入的
 如果在批处理中不想显示出命令执行过程可以再reg前面加入@，后面加上>nul，不用加空格，紧贴命令前后。
 例子：@reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "test" /t REG_DWORD /d "c:\windows\system32\regedit" /f>nul
 
+修改环境变量Path的值
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
 @reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_SZ /d "%PATH%d:\xyz" /f>nul
+
+禁用网络级别身份验证(NLA)
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SecurityLayer /t REG_DWORD /d 2 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
+
+启用远程桌面连接
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+
+REM 重启远程桌面服务
+net stop TermService /y
+net start TermService
 
 REG Operation [Parameter List]
 Operation  [ QUERY   | ADD    | DELETE  | COPY    |
