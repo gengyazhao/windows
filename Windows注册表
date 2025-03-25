@@ -21,6 +21,23 @@ REM 重启远程桌面服务
 net stop TermService /y
 net start TermService
 
+echo 启用不安全的来宾登录
+reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters /v AllowInsecureGuestAuth /t REG_DWORD /d 1 /f
+net stop LanmanWorkstation && net start LanmanWorkstation
+
+echo 正在设置高性能电源计划...
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+echo 正在修改电源设置...
+REM 关闭显示器时间（AC电源和电池）
+powercfg /change monitor-timeout-ac 0
+powercfg /change monitor-timeout-dc 0
+REM 禁用休眠（睡眠超时）
+powercfg /change standby-timeout-ac 0
+powercfg /change standby-timeout-dc 0
+
+
+
+
 REG Operation [Parameter List]
 Operation  [ QUERY   | ADD    | DELETE  | COPY    |
             SAVE    | LOAD   | UNLOAD  | RESTORE |
