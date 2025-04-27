@@ -1,0 +1,26 @@
+@echo off
+chcp 65001
+setlocal
+:: 配置映射信息
+set DRIVE_LETTER=Z:
+set SHARE_PATH=\\1.1.1.1\d$
+::set USERNAME=your_username  :: 替换为实际用户名
+::set PASSWORD=your_password  :: 替换为实际密码
+:: 检查是否已映射
+net use %DRIVE_LETTER% >nul 2>&1
+if %errorlevel% equ 0 (
+    echo 驱动器 %DRIVE_LETTER% 已映射，正在断开...
+    net use %DRIVE_LETTER% /delete /y
+)
+:: 映射网络驱动器
+echo 正在映射 %SHARE_PATH% 到 %DRIVE_LETTER% ...
+::net use %DRIVE_LETTER% %SHARE_PATH% /persistent:yes /user:%USERNAME% %PASSWORD%
+net use %DRIVE_LETTER% %SHARE_PATH% /persistent:yes
+if %errorlevel% equ 0 (
+    echo 映射成功！
+    echo 驱动器 %DRIVE_LETTER% 现在可以访问。
+) else (
+    echo 映射失败！错误代码: %errorlevel%
+    pause
+)
+endlocal
