@@ -1,0 +1,39 @@
+chcp 65001
+@echo off
+echo 正在设置高性能电源计划...
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+echo 正在修改电源设置...
+REM 关闭显示器时间（AC电源和电池）
+powercfg /change monitor-timeout-ac 0
+powercfg /change monitor-timeout-dc 0
+REM 禁用休眠（睡眠超时）
+powercfg /change standby-timeout-ac 0
+powercfg /change standby-timeout-dc 0
+echo 电源选项已成功配置！
+echo 高性能模式已启用
+echo 显示器关闭时间：从不
+echo 计算机休眠时间：从不
+echo 禁用网络级别身份验证(NLA)
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v SecurityLayer /t REG_DWORD /d 2 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
+echo 启用远程桌面连接
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+echo 启用不安全的来宾登录
+reg add HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters /v AllowInsecureGuestAuth /t REG_DWORD /d 1 /f
+net stop LanmanWorkstation && net start LanmanWorkstation
+
+echo 正在尝试停止TermService服务...
+PowerShell -Command "Stop-Service -Name TermService -Force"
+if %errorlevel% equ 0 (
+    echo 服务已成功停止
+) else (
+    echo 操作失败，请检查权限或服务名称
+)
+echo 重启远程桌面服务
+net start TermService
+echo 设置小网永久路由
+route add 2.2.0.0 mask 255.255.0.0 2.2.128.1 -p
+::netsh interface set interface name=LOM1 newname="abc"	
+echo 设置abc网卡的IP地址和子网掩码
+netsh interface ip set address name="abc" source=static addr=2.2.1.1 mask=255.255.240.0	
+pause
