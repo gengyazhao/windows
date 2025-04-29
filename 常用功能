@@ -1,0 +1,48 @@
+1、复制,不提示重复直接覆盖;..当前目录的上一级目录
+copy /Y %~dp0\a.txt d:\abc\a.txt
+copy /Y %~dp0\a.txt ..\abc\a.txt
+
+2、杀进程,强制杀掉abc.exe的进程
+taskkill /f /im abc.exe
+
+3、设置变量
+set "abc=www.xyz.com"
+
+4、静默安装,::start 函数执行软件安装 /wait函数表示等待静默安装，/S表示自动执行安装默认参数
+start /wait %~dp0\abc.exe /S
+if %errorlevel% nep 0(
+  echo abc.exe install failed
+  pause
+  exit
+)
+
+5、修改系统环境变量
+wmic environment where "name='path' and username='<system>'" set VariableValue='d:\abc;%path%'
+
+6、通过修改注册表修改系统环境变量
+@reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path /t REG_SZ /d "D:\abc;%PATH%" /f>nul
+@%windir%\System32\rundll32.exe user32.dll,UpdatePerUserSystemParameters ,1
+@echo %Path%
+pause  
+
+7、删除指定文件夹内所有文件以及子文件夹内的文件
+rd /s /q d:\abc
+
+8、重命名文件夹
+ren .\abc abcd
+
+9、多网卡机器获取本机指定网段的IP地址
+for /f "tokens=2 delims=:" %%A in ('ipconfig ^| findstr "IPv4" ^| findstr "10.10"') do set IP=%%A
+set abc=%IP:~1%
+
+10、Windows系统命令行下载,带空格的目录
+  set destination="C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\abc.jnlp"
+  curl -o  %destination% %downURL%
+  start /wait javaws "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\abc.jnlp" -silent
+
+11、使用Chrome打开指定网页
+cd "C:\Program Files\Google\Chrome\Application"
+start chrome.exe http://www.baidu.com/
+
+12、xcopy
+start /wait xcopy /Y /E /J \\1.1.1.1\d$\abc\ d:\abc\
