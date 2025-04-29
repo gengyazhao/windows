@@ -37,3 +37,33 @@ route add 2.2.0.0 mask 255.255.0.0 2.2.128.1 -p
 echo 设置abc网卡的IP地址和子网掩码
 netsh interface ip set address name="abc" source=static addr=2.2.1.1 mask=255.255.240.0	
 pause
+
+
+
+
+chcp 65001
+@echo off
+:: 设置网卡名称
+set "adapterName=xyz"
+:: 设置IP地址、子网掩码和网关
+set "ipAddress=1.1.1.2"
+set "subnetMask=255.255.252.0"
+set "gateway=1.1.1.1"
+:: 设置DNS服务器
+set "dns1=7.7.7.7"
+set "dns2=6.6.6.6"
+set "dns3=75.5.5.5"
+echo 正在配置网卡 "%adapterName%"...
+echo IP地址: %ipAddress%
+echo 子网掩码: %subnetMask%
+echo 网关: %gateway%
+echo DNS服务器: %dns1%, %dns2%, %dns3%
+echo.
+:: 设置静态IP和网关
+netsh interface ipv4 set address name="%adapterName%" static %ipAddress% %subnetMask% %gateway% 1
+:: 清除现有DNS设置
+netsh interface ipv4 set dns name="%adapterName%" static %dns1% primary validate=no
+netsh interface ipv4 add dns name="%adapterName%" %dns2% index=2 validate=no
+netsh interface ipv4 add dns name="%adapterName%" %dns3% index=3 validate=no
+echo 网络配置完成。
+pause
